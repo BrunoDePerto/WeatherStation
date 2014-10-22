@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>WeatherStation Projetct</title>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!--Inicio do Mapa-->
+            <!--Responsável por relaizar a atualização do componente id mapa-->
+            <p:poll interval="60" update="mapa" />
+            <p:growl id="growl" showDetail="true"/>
+            <p:gmap id="mapa" center="#{mapaBean.localizacao}" zoom="15" type="HYBRID" model="#{mapaBean.simpleModel}" style="width:900px;height:600px">
+                <p:ajax event="overlaySelect" listener="#{mapaBean.onMarkerSelect}" update="growl" />
+                <p:ajax event="pointSelect" listener="#{eventView.onPointSelect}" update="growl" />
+            </p:gmap>
+            <!--Type: trata da forma de visualizar o mapa, que pode ser: HYBRID (mapa e satélite), 
+            ROADMAP (apenas mapa), TERRAIN (terreno) SATELLITE (visão do satélite);-->
+            <!--Fim do Mapa-->
+
+            <!-- Início da Luminosidade -->
+            <!--Responsável por relaizar a atualização do componente id luminosidade-->
+            <p:poll interval="10" update="luminosidadeText"/>
+            <p:poll interval="10" update="luminosidadeImg" />
+            <p:graphicImage id="luminosidadeImg" value="#{luminosidadeBean.imagem}" width="90" height="90" style="cursor:pointer" cache="false" title="Custom Options"/>
+            <p:outputLabel id="luminosidadeText" value="#{luminosidadeBean.luminosidade} %"/>
+            <!--Fim do Luminosidade-->
+
+            <!-- Início da Temperatura -->
+            <!--Responsável por relaizar a  atualização do componente id Temperatura-->
+            <p:poll interval="10" update="temperaturaText"/>
+            <p:poll interval="10" update="temperaturaImg"/>
+            <p:graphicImage id="temperaturaImg" value="#{temperaturaBean.imagem}" width="90" height="90" style="cursor:pointer" cache="false" title="Custom Options"/>
+            <p:outputLabel id="temperaturaText" value="#{temperaturaBean.temperatura} °C"/>
+            <!--Fim da Temperatura-->
+
+            <!-- Início da Umidade -->
+            <!--Responsável por relaizar a atualização do componente id Umidade-->
+            <p:poll interval="10" update="umidadeText"/>
+            <p:poll interval="10" update="umidadeImg"/>
+            <p:graphicImage id="umidadeImg" value="#{umidadeBean.imagem}" width="90" height="90" style="cursor:pointer" cache="false" title="Custom Options"/>
+            <p:outputLabel id="umidadeText" value="#{umidadeBean.umidade} %"/>
+            <!--Fim da Umidade-->
+
+            <!-- Início do Vento -->
+            <!--Responsável por relaizar a atualização do componente id Vento-->
+            <p:poll interval="10" update="ventoText"/>
+            <p:poll interval="10" update="ventoImg"/>
+            <p:graphicImage id="ventoImg" value="#{ventoBean.imagem}" width="90" height="90" style="cursor:pointer" rendered="true"  cache="true" title="Custom Options"/>
+            <p:outputLabel id="ventoText" value="#{ventoBean.vento} Km"/>
+            <!--Fim da Umidade-->
+
+            <!-- Início do Gráfico -->
+            <!--Responsável por relaizar a atualização do componente id Grafico-->
+            <br/>
+            <br/>
+            <br/>
+            <!--
+            <p:poll interval="10" update="grafico" /> 
+            -->
+            <!--
+            <p:chart id="grafico" type="line" model="#{graficoBean.lineModel2}" style="height:200px;"/>
+            -->
+            <!--Fim do gráfico-->
+
+        </h:form>
+    </h:body>
+</html>
+
