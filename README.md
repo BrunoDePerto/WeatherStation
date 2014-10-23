@@ -1,4 +1,0 @@
-WeatherStation
-==============
-
-Dentro da pasta 
